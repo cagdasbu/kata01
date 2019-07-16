@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * UnitType test for simple Kata01.
  */
 public class AppTest 
 {

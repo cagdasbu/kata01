@@ -3,7 +3,7 @@ package com.novacode;
 /**
  *
  */
-public class App 
+public class Kata01
 {
     public static void main( String[] args )
     {
