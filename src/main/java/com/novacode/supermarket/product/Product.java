@@ -2,13 +2,13 @@ package com.novacode.supermarket.product;
 
 import java.math.BigDecimal;
 
-public class Product {
+public final class Product {
 
-    private String productId;
+    private final String productId;
 
-    private String productName;
+    private final String productName;
 
-    private BigDecimal unitCost;
+    private final BigDecimal unitCost;
 
     public Product(String productId, String productName, BigDecimal unitCost) {
         this.productId = productId;
@@ -20,23 +20,14 @@ public class Product {
         return productId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
 
     public BigDecimal getUnitCost() {
         return unitCost;
     }
 
-    public void setUnitCost(BigDecimal unitCost) {
-        this.unitCost = unitCost;
-    }
 }
