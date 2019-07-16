@@ -1,4 +1,4 @@
-package com.novacode.supermarket.entity;
+package com.novacode.supermarket.product;
 
 import java.math.BigDecimal;
 
