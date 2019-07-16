@@ -1,6 +1,5 @@
-package com.novacode.supermarket.service.impl;
+package com.novacode.supermarket.checkout;
 
-import com.novacode.supermarket.checkout.ShoppingCart;
 import com.novacode.supermarket.product.Product;
 import com.novacode.supermarket.product.StoreServiceImpl;
 import org.junit.Assert;
