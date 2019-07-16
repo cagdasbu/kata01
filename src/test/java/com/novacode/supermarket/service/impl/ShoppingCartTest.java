@@ -2,7 +2,7 @@ package com.novacode.supermarket.service.impl;
 
 import com.novacode.supermarket.checkout.ShoppingCart;
 import com.novacode.supermarket.product.Product;
-import com.novacode.supermarket.product.StoreService;
+import com.novacode.supermarket.product.StoreServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class ShoppingCartTest {
 
     @Test
     public void add() {
-        Product item = StoreService.getInstance().getProduct("1");
+        Product item = StoreServiceImpl.getInstance().getProduct("1");
         shoppingCart.add(item);
         shoppingCart.checkout();
     }
@@ -31,7 +31,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void simpleCheckout() {
-        Product item = StoreService.getInstance().getProduct("1");
+        Product item = StoreServiceImpl.getInstance().getProduct("1");
         shoppingCart.add(item);
         BigDecimal total = shoppingCart.checkout();
         Assert.assertEquals(new BigDecimal(.5), total);
@@ -42,8 +42,8 @@ public class ShoppingCartTest {
      */
     @Test
     public void simpleCheckout_MultipleItems() {
-        Product bean = StoreService.getInstance().getProduct("1");
-        Product coke = StoreService.getInstance().getProduct("2");
+        Product bean = StoreServiceImpl.getInstance().getProduct("1");
+        Product coke = StoreServiceImpl.getInstance().getProduct("2");
 
         shoppingCart.add(bean);
         shoppingCart.add(coke);

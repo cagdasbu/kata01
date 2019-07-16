@@ -2,6 +2,7 @@ package com.novacode.supermarket.checkout;
 
 import com.novacode.supermarket.product.Product;
 import com.novacode.supermarket.product.StoreService;
+import com.novacode.supermarket.product.StoreServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class ShoppingCart {
     private StoreService storeService;
 
     public ShoppingCart() {
-        this.storeService = StoreService.getInstance();
+        this.storeService = StoreServiceImpl.getInstance();
         this.cartItems = new HashMap<>(1);
     }
 
