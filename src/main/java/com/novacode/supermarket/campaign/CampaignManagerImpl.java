@@ -19,8 +19,8 @@ public class CampaignManagerImpl implements CampaignManager {
         campaigns = new HashMap<>();
 
         //TODO campaigns needs to be externalised to be provisioned properly
-        campaigns.put("1", new XForYCampaignImpl(storeService.getProduct("1"), 3, 2));
-        campaigns.put("2", new QuantityForPriceCampaignImpl(storeService.getProduct("2"), 2, new BigDecimal(1)));
+        campaigns.put("B", new XForYCampaignImpl(storeService.getProduct("B"), 3, 2));
+        campaigns.put("C", new QuantityForPriceCampaignImpl(storeService.getProduct("C"), 2, new BigDecimal(1)));
     }
 
     public static CampaignManager getInstance() {

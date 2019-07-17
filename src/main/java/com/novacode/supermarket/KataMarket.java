@@ -31,14 +31,20 @@ public class KataMarket {
                 logger.warning(String.format("Incorrect order format %s",order));
             }
             Product product = storeService.getProduct(ordersDetails[0]);
-            Quantity quantity;
-            if(product.getQuantityType() == Quantity.Type.PCS) {
-                quantity = new CountableQuantity(Integer.parseInt(ordersDetails[1]), product.getQuantityType());
-            } else {
-                quantity = new ScalableQuantity(Double.parseDouble(ordersDetails[1]), product.getQuantityType());
+            if(product!= null) {
+                Quantity quantity;
+                if(product.getQuantityType() == Quantity.Type.PCS) {
+                    quantity = new CountableQuantity(Integer.parseInt(ordersDetails[1]), product.getQuantityType());
+                } else {
+                    quantity = new ScalableQuantity(Double.parseDouble(ordersDetails[1]), product.getQuantityType());
 
+                }
+                cart.add(storeService.getProduct(ordersDetails[0]), quantity);
+            } else {
+                logger.warning(String.format("Product: %s not found.", ordersDetails[0]));
             }
-            cart.add(storeService.getProduct(ordersDetails[0]), quantity);
+
+
         }
 
         logger.info("Checking out...");
