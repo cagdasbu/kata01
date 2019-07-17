@@ -32,7 +32,7 @@ public class ShoppingCartTest {
     public void simpleCheckout() {
         Product item = StoreServiceImpl.getInstance().getProduct("1");
         shoppingCart.add(item);
-        BigDecimal total = shoppingCart.checkout();
+        BigDecimal total = shoppingCart.checkout().getTotal();
         Assert.assertEquals(new BigDecimal(.5), total);
     }
 
@@ -47,7 +47,7 @@ public class ShoppingCartTest {
         shoppingCart.add(bean);
         shoppingCart.add(coke);
 
-        BigDecimal total = shoppingCart.checkout();
+        BigDecimal total = shoppingCart.checkout().getTotal();
         MathContext mathContext = new MathContext(2);
         Assert.assertEquals(new BigDecimal(1.2).round(mathContext), total.round(mathContext));
     }

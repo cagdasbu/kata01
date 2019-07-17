@@ -4,9 +4,12 @@ import com.novacode.supermarket.campaign.Campaign;
 import com.novacode.supermarket.campaign.CampaignManager;
 import com.novacode.supermarket.campaign.CampaignManagerImpl;
 import com.novacode.supermarket.product.Product;
+import com.novacode.supermarket.product.StoreServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
@@ -33,15 +36,30 @@ public class ShoppingCart {
         }
     }
 
-    public BigDecimal checkout() {
+    public Bill checkout() {
 
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal subtotal = BigDecimal.ZERO;
+
+        List<CheckoutItem> checkoutItems = new ArrayList<>();
+        List<CheckoutItem> discounts = new ArrayList<>();
+
         for (Map.Entry<String, Integer> cartItem : cartItems.entrySet()) {
-            Campaign campaign = campaignManager.getCampaign(cartItem.getKey());
-            BigDecimal cartItemAmount = campaign.apply(new CartItem(cartItem.getKey(), cartItem.getValue()));
-            total = total.add(cartItemAmount);
+            Product product = StoreServiceImpl.getInstance().getProduct(cartItem.getKey());
+            CheckoutItem checkoutItem = new  CheckoutItem(product.getProductName(),
+                    product.getUnitCost().multiply(new BigDecimal(cartItem.getValue())));
+            subtotal = subtotal.add(checkoutItem.getAmount());
+            checkoutItems.add(checkoutItem);
         }
 
-        return total;
+        BigDecimal total = subtotal.add(BigDecimal.ZERO);
+        for (Map.Entry<String, Integer> cartItem : cartItems.entrySet()) {
+            Campaign campaign = campaignManager.getCampaign(cartItem.getKey());
+            if(campaign != null) {
+                CheckoutItem checkoutItem = campaign.apply(new CartItem(cartItem.getKey(), cartItem.getValue()));
+                total = total.add(checkoutItem.getAmount());
+                discounts.add(checkoutItem);
+            }
+        }
+        return new Bill(checkoutItems, discounts);
     }
 }

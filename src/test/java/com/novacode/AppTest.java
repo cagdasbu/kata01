@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * UnitType test for simple Kata01.
+ * KataMarket.
  */
 public class AppTest 
 {
