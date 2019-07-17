@@ -13,10 +13,12 @@ import java.math.MathContext;
 
 public class QuantityForPriceCampaignImplTest {
 
+    private Campaign campaign;
+
     @Test
     public void apply() {
         Product product = StoreServiceImpl.getInstance().getProduct("2");
-        Campaign campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
+        campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(5, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-0.8).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
     }
@@ -24,7 +26,7 @@ public class QuantityForPriceCampaignImplTest {
     @Test
     public void apply_largeVal() {
         Product product = StoreServiceImpl.getInstance().getProduct("2");
-        Campaign campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
+        campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(150, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-30).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
     }
@@ -32,7 +34,7 @@ public class QuantityForPriceCampaignImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void apply_KG() {
         Product product = StoreServiceImpl.getInstance().getProduct("2");
-        Campaign campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
+        campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(150, Quantity.Type.KG)));
     }
 }
