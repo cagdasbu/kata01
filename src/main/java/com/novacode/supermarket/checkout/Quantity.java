@@ -1,21 +1,21 @@
 package com.novacode.supermarket.checkout;
 
-public class Quantity {
+public abstract class Quantity<T extends Number> {
 
     public enum Type  {
         PCS, KG;
     };
 
-    private Double value;
+    T value;
 
     private Type type;
 
-    public Quantity(double value, Type type) {
+    public Quantity(T value, Type type) {
         this.value = value;
         this.type = type;
     }
 
-    public Double getValue() {
+    public T getValue() {
         return value;
     }
 
@@ -23,8 +23,6 @@ public class Quantity {
         return type;
     }
 
-    public Double incrementQuantity(double value) {
-        this.value += value;
-        return this.value;
-    }
+    public abstract T incrementQuantity(T value);
+
 }
