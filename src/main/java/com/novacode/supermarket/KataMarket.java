@@ -33,9 +33,9 @@ public class KataMarket {
             Product product = storeService.getProduct(ordersDetails[0]);
             Quantity quantity;
             if(product.getQuantityType() == Quantity.Type.PCS) {
-                quantity = new CountableQuantity(Integer.parseInt(ordersDetails[1]), Quantity.Type.PCS);
+                quantity = new CountableQuantity(Integer.parseInt(ordersDetails[1]), product.getQuantityType());
             } else {
-                quantity = new ScalableQuantity(Double.parseDouble(ordersDetails[1]), Quantity.Type.PCS);
+                quantity = new ScalableQuantity(Double.parseDouble(ordersDetails[1]), product.getQuantityType());
 
             }
             cart.add(storeService.getProduct(ordersDetails[0]), quantity);

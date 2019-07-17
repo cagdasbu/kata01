@@ -23,7 +23,7 @@ public class ShoppingCart {
     }
 
     public void add(Product product, Quantity quantity) {
-        if(product.getQuantityType() != quantity.getType()) {
+        if (product.getQuantityType() != quantity.getType()) {
             throw new IllegalArgumentException(String.format("Type %s cannot be added to %s", quantity.getType().toString(), product.getProductName()));
         }
 
@@ -44,7 +44,7 @@ public class ShoppingCart {
         List<CheckoutItem> discounts = new ArrayList<>();
 
         for (Map.Entry<String, CartItem> cartItem : cartItems.entrySet()) {
-            CheckoutItem checkoutItem = new  CheckoutItem(cartItem.getValue(), cartItem.getValue().getCost());
+            CheckoutItem checkoutItem = new CheckoutItem(cartItem.getValue(), cartItem.getValue().getCost());
             subtotal = subtotal.add(checkoutItem.getAmount());
             checkoutItems.add(checkoutItem);
         }
@@ -52,7 +52,7 @@ public class ShoppingCart {
         BigDecimal total = subtotal.add(BigDecimal.ZERO);
         for (Map.Entry<String, CartItem> cartItem : cartItems.entrySet()) {
             Campaign campaign = campaignManager.getCampaign(cartItem.getKey());
-            if(campaign != null) {
+            if (campaign != null) {
                 CheckoutItem checkoutItem = campaign.apply(cartItem.getValue());
                 total = total.add(checkoutItem.getAmount());
                 discounts.add(checkoutItem);
