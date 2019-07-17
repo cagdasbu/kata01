@@ -25,6 +25,12 @@ public class ShoppingCartTest {
         shoppingCart.checkout();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void add_incompatibleQuantity() {
+        Product item = StoreServiceImpl.getInstance().getProduct("1");
+        shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.KG));
+    }
+
     /**
      * Testing basic pricing with multiple products
      */

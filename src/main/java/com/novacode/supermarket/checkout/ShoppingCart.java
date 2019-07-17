@@ -4,7 +4,6 @@ import com.novacode.supermarket.campaign.Campaign;
 import com.novacode.supermarket.campaign.CampaignManager;
 import com.novacode.supermarket.campaign.CampaignManagerImpl;
 import com.novacode.supermarket.product.Product;
-import com.novacode.supermarket.product.StoreServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,6 +23,10 @@ public class ShoppingCart {
     }
 
     public void add(Product product, Quantity quantity) {
+        if(product.getQuantityType() != quantity.getType()) {
+            throw new IllegalArgumentException(String.format("Type %s cannot be added to %s", quantity.getType().toString(), product.getProductName()));
+        }
+
         CartItem cartItem = this.cartItems.get(product.getProductId());
         if (cartItem == null) {
             this.cartItems.put(product.getProductId(), new CartItem(product, quantity));
