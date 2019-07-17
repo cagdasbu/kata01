@@ -1,4 +1,4 @@
-# KATA 01 - Assesment Approach
+# KATA 01 - Assessment Approach
 
 This repository represents a modelling approach to the problem given in
 http://codekata.com/kata/kata01-supermarket-pricing/
