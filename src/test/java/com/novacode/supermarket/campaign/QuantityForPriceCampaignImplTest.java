@@ -28,4 +28,11 @@ public class QuantityForPriceCampaignImplTest {
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(150, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-30).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void apply_KG() {
+        Product product = StoreServiceImpl.getInstance().getProduct("2");
+        Campaign campaign = new QuantityForPriceCampaignImpl(product, 2 , BigDecimal.ONE);
+        CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(150, Quantity.Type.KG)));
+    }
 }
