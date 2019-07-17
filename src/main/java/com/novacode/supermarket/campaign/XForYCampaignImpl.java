@@ -32,8 +32,19 @@ public class XForYCampaignImpl implements Campaign {
     }
 
     public CheckoutItem apply(CartItem cartItem) {
-        Integer campaignBundle = (int)(cartItem.getQuantity().getValue() / new Double(campaignQty));
-        return new CheckoutItem(this.product.getProductName(), discount.multiply(new BigDecimal(campaignBundle)));
+        Integer campaignBundle = cartItem.getQuantity().getValue().intValue() / campaignQty;
+        return new CheckoutItem(cartItem, discount.multiply(new BigDecimal(campaignBundle)));
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getCampaignQty() {
+        return campaignQty;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
 }

@@ -1,5 +1,7 @@
 package com.novacode.supermarket.product;
 
+import com.novacode.supermarket.checkout.Quantity;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +16,9 @@ public class StoreServiceImpl implements StoreService {
     private Map<String, Product> productMap = new HashMap<>();
 
     private StoreServiceImpl() {
-        productMap.put("1", new Product("1", "Beans", new BigDecimal(0.5)));
-        productMap.put("2", new Product("2", "Coke", new BigDecimal(0.7)));
-        productMap.put("3", new Product("3", "Orange", new BigDecimal(1.99)));
+        productMap.put("1", new Product("1", "Beans", new BigDecimal(0.5), Quantity.Type.PCS));
+        productMap.put("2", new Product("2", "Coke", new BigDecimal(0.7),  Quantity.Type.PCS));
+        productMap.put("3", new Product("3", "Orange", new BigDecimal(1.99), Quantity.Type.KG));
     }
 
     public static StoreServiceImpl getInstance(){

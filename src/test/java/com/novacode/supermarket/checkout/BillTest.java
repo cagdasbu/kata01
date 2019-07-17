@@ -7,13 +7,16 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
 
+import static com.novacode.supermarket.helper.TestItemFactory.getSampleCartItem;
+
 public class BillTest {
+
 
     @Test
     public void getSubtotal() {
-        CheckoutItem item1 = new CheckoutItem("item1", BigDecimal.ONE);
-        CheckoutItem item2 = new CheckoutItem("item2", BigDecimal.TEN);
-        CheckoutItem item3 = new CheckoutItem("item3", new BigDecimal(.5));
+        CheckoutItem item1 = new CheckoutItem(getSampleCartItem("item1"), BigDecimal.ONE);
+        CheckoutItem item2 = new CheckoutItem(getSampleCartItem("item2"), BigDecimal.TEN);
+        CheckoutItem item3 = new CheckoutItem(getSampleCartItem("item3"), new BigDecimal(.5));
 
         Bill bill = new Bill(Arrays.asList(item1,item2, item3), null);
         BigDecimal subtotal = bill.getSubtotal();
@@ -22,11 +25,11 @@ public class BillTest {
 
     @Test
     public void getSubtotal_withDiscounts() {
-        CheckoutItem item1 = new CheckoutItem("item1", BigDecimal.ONE);
-        CheckoutItem item2 = new CheckoutItem("item2", BigDecimal.TEN);
-        CheckoutItem item3 = new CheckoutItem("item3", new BigDecimal(.5));
+        CheckoutItem item1 = new CheckoutItem(getSampleCartItem("item1"), BigDecimal.ONE);
+        CheckoutItem item2 = new CheckoutItem(getSampleCartItem("item2"), BigDecimal.TEN);
+        CheckoutItem item3 = new CheckoutItem(getSampleCartItem("item3"), new BigDecimal(.5));
 
-        CheckoutItem disc1 = new CheckoutItem("item1-disc", new BigDecimal(2).negate() );
+        CheckoutItem disc1 = new CheckoutItem(getSampleCartItem("item1-disc"), new BigDecimal(2).negate() );
 
         Bill bill = new Bill(Arrays.asList(item1,item2, item3), Arrays.asList(disc1));
         BigDecimal subtotal = bill.getSubtotal();
@@ -35,7 +38,7 @@ public class BillTest {
 
     @Test
     public void getSubtotal_withNoCheckoutItem() {
-        CheckoutItem disc1 = new CheckoutItem("item1-disc", new BigDecimal(2).negate() );
+        CheckoutItem disc1 = new CheckoutItem(getSampleCartItem("item1-disc"), new BigDecimal(2).negate() );
 
         Bill bill = new Bill(null, Arrays.asList(disc1));
         BigDecimal subtotal = bill.getSubtotal();
@@ -44,9 +47,9 @@ public class BillTest {
 
     @Test
     public void getDiscountAmount_NoDiscount() {
-        CheckoutItem item1 = new CheckoutItem("item1", BigDecimal.ONE);
-        CheckoutItem item2 = new CheckoutItem("item2", BigDecimal.TEN);
-        CheckoutItem item3 = new CheckoutItem("item3", new BigDecimal(.5));
+        CheckoutItem item1 = new CheckoutItem(getSampleCartItem("item1"), BigDecimal.ONE);
+        CheckoutItem item2 = new CheckoutItem(getSampleCartItem("item2"), BigDecimal.TEN);
+        CheckoutItem item3 = new CheckoutItem(getSampleCartItem("item3"), new BigDecimal(.5));
 
         Bill bill = new Bill(Arrays.asList(item1,item2, item3), null);
         BigDecimal discountAmount = bill.getDiscountAmount();
@@ -55,12 +58,12 @@ public class BillTest {
 
     @Test
     public void getDiscountAmount_WithDiscount() {
-        CheckoutItem item1 = new CheckoutItem("item1", BigDecimal.ONE);
-        CheckoutItem item2 = new CheckoutItem("item2", BigDecimal.TEN);
-        CheckoutItem item3 = new CheckoutItem("item3", new BigDecimal(.5));
+        CheckoutItem item1 = new CheckoutItem(getSampleCartItem("item1"), BigDecimal.ONE);
+        CheckoutItem item2 = new CheckoutItem(getSampleCartItem("item2"), BigDecimal.TEN);
+        CheckoutItem item3 = new CheckoutItem(getSampleCartItem("item3"), new BigDecimal(.5));
 
-        CheckoutItem disc1 = new CheckoutItem("item1-disc", new BigDecimal(2).negate() );
-        CheckoutItem disc2 = new CheckoutItem("item2-disc", new BigDecimal(2.5).negate() );
+        CheckoutItem disc1 = new CheckoutItem(getSampleCartItem("item1-disc"), new BigDecimal(2).negate() );
+        CheckoutItem disc2 = new CheckoutItem(getSampleCartItem("item2-disc"), new BigDecimal(2.5).negate() );
 
         Bill bill = new Bill(Arrays.asList(item1,item2, item3), Arrays.asList(disc1,disc2));
         BigDecimal discountAmount = bill.getDiscountAmount();
@@ -69,13 +72,13 @@ public class BillTest {
 
     @Test
     public void getTotal() {
-        CheckoutItem item1 = new CheckoutItem("item1", BigDecimal.ONE);
-        CheckoutItem item2 = new CheckoutItem("item2", BigDecimal.TEN);
-        CheckoutItem item3 = new CheckoutItem("item3", new BigDecimal(.5));
+        CheckoutItem item1 = new CheckoutItem(getSampleCartItem("item1"), BigDecimal.ONE);
+        CheckoutItem item2 = new CheckoutItem(getSampleCartItem("item2"), BigDecimal.TEN);
+        CheckoutItem item3 = new CheckoutItem(getSampleCartItem("item3"), new BigDecimal(.5));
 
-        CheckoutItem disc1 = new CheckoutItem("item1-disc", new BigDecimal(2).negate() );
-        CheckoutItem disc2 = new CheckoutItem("item2-disc", new BigDecimal(2.5).negate() );
-        CheckoutItem disc3 = new CheckoutItem("item3-disc", new BigDecimal(2.5).negate() );
+        CheckoutItem disc1 = new CheckoutItem(getSampleCartItem("item1-disc"), new BigDecimal(2).negate() );
+        CheckoutItem disc2 = new CheckoutItem(getSampleCartItem("item2-disc"), new BigDecimal(2.5).negate() );
+        CheckoutItem disc3 = new CheckoutItem(getSampleCartItem("item3-disc"), new BigDecimal(2.5).negate() );
 
         Bill bill = new Bill(Arrays.asList(item1,item2, item3), Arrays.asList(disc1,disc2, disc3));
         BigDecimal total = bill.getTotal();

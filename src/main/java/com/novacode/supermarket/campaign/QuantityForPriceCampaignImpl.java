@@ -38,8 +38,19 @@ public class QuantityForPriceCampaignImpl implements Campaign {
             throw new IllegalArgumentException("Non PCS Quantities are not applicable for QuantityForPriceCampaign");
         }
 
-        Integer campaignBundle = (int) (cartItem.getQuantity().getValue() / campaignQty);
-        return new CheckoutItem(this.product.getProductName(), this.discount.multiply(new BigDecimal(campaignBundle)));
+        Integer campaignBundle = (cartItem.getQuantity().getValue().intValue() / campaignQty);
+        return new CheckoutItem(cartItem, this.discount.multiply(new BigDecimal(campaignBundle)));
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getCampaignQty() {
+        return campaignQty;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
 }
