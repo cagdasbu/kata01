@@ -1,5 +1,7 @@
 package com.novacode.supermarket.product;
 
+import com.novacode.supermarket.checkout.Quantity;
+
 import java.math.BigDecimal;
 
 public final class Product {
@@ -10,10 +12,13 @@ public final class Product {
 
     private final BigDecimal unitCost;
 
-    public Product(String productId, String productName, BigDecimal unitCost) {
+    private final Quantity.Type quantityType;
+
+    public Product(String productId, String productName, BigDecimal unitCost, Quantity.Type type) {
         this.productId = productId;
         this.productName = productName;
         this.unitCost = unitCost;
+        this.quantityType = type;
     }
 
     public String getProductId() {
@@ -30,4 +35,7 @@ public final class Product {
         return unitCost;
     }
 
+    public Quantity.Type getQuantityType() {
+        return quantityType;
+    }
 }
