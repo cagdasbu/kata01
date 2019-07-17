@@ -14,6 +14,13 @@ Repo using maven as package manager. You can simply build via;
 ```mvn clean package```
 
 ## Testing
-Since no frameworks have been used, a small interaction logic implemented which can be run;
+Since no frameworks have been used, a small interaction logic implemented which the problem case bill scenario can be run;
 
-```mvn exec:java -Dexec.mainClass="com.novacode.supermarket.KataMarket" -Dexec.args="1:3 2:2 3:0.2"```
+```mvn exec:java -Dexec.mainClass="com.novacode.supermarket.KataMarket" -Dexec.args="B:3 C:2 O:0.2"```
+
+* B represents Beans
+* C represents Coke
+* O represents Oranges
+
+Campaing details has been implemented as the scenario defined in CampaignManager, not editable.
+ 
