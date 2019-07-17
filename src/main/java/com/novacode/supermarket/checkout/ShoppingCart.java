@@ -41,7 +41,6 @@ public class ShoppingCart {
         List<CheckoutItem> discounts = new ArrayList<>();
 
         for (Map.Entry<String, CartItem> cartItem : cartItems.entrySet()) {
-            Product product = cartItem.getValue().getProduct();
             CheckoutItem checkoutItem = new  CheckoutItem(cartItem.getValue(), cartItem.getValue().getCost());
             subtotal = subtotal.add(checkoutItem.getAmount());
             checkoutItems.add(checkoutItem);
