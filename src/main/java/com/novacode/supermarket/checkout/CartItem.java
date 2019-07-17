@@ -28,6 +28,7 @@ public final class CartItem {
     }
 
     public BigDecimal getCost(){
+        // here we have a design tweak because Type and Quantity are not integrated each other
         if (product.getQuantityType() == Quantity.Type.PCS) {
             return product.getUnitCost().multiply( new BigDecimal((Integer) quantity.getValue()));
         } else {
