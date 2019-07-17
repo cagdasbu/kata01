@@ -32,6 +32,6 @@ public class CampaignManagerImpl implements CampaignManager {
 
     @Override
     public Campaign getCampaign(String productId) {
-        return campaigns.get(productId) == null ? new DefaultCampaignImpl(storeService.getProduct(productId)) : campaigns.get(productId);
+        return campaigns.get(productId);
     }
 }

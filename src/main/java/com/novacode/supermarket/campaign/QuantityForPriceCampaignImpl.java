@@ -1,6 +1,7 @@
 package com.novacode.supermarket.campaign;
 
 import com.novacode.supermarket.checkout.CartItem;
+import com.novacode.supermarket.checkout.CheckoutItem;
 import com.novacode.supermarket.product.Product;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public class QuantityForPriceCampaignImpl implements Campaign {
 
     private int campaignQty;
 
-    private BigDecimal campaignPrice;
+    private BigDecimal discount;
 
     /**
      * Constructor
@@ -27,17 +28,13 @@ public class QuantityForPriceCampaignImpl implements Campaign {
     public QuantityForPriceCampaignImpl(Product product, int campaignQty, BigDecimal campaignPrice) {
         this.product = product;
         this.campaignQty = campaignQty;
-        this.campaignPrice = campaignPrice;
+        this.discount = product.getUnitCost().multiply(new BigDecimal(campaignQty)).subtract(campaignPrice).negate();
     }
 
     @Override
-    public BigDecimal apply(CartItem cartItem) {
-
+    public CheckoutItem apply(CartItem cartItem) {
         Integer campaignBundle = cartItem.getQuantity() / campaignQty;
-        Integer defaultBundle = cartItem.getQuantity() % campaignQty;
-
-        BigDecimal bundlePrice = campaignPrice.multiply(new BigDecimal(campaignBundle));
-        BigDecimal defaultPrice = product.getUnitCost().multiply(new BigDecimal(defaultBundle));
-        return bundlePrice.add(defaultPrice);
+        return new CheckoutItem(this.product.getProductName(), this.discount.multiply(new BigDecimal(campaignBundle)));
     }
+
 }

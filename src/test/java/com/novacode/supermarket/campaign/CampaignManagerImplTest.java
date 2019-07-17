@@ -16,7 +16,6 @@ public class CampaignManagerImplTest {
     public void getDefaultCampaign() {
         CampaignManager campaignManager = CampaignManagerImpl.getInstance();
         Campaign campaign = campaignManager.getCampaign("3");
-        Assert.assertNotNull(campaign);
-        assert campaign instanceof DefaultCampaignImpl;
+        Assert.assertNull(campaign);
     }
 }

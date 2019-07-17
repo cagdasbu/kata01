@@ -1,14 +1,13 @@
 package com.novacode.supermarket.campaign;
 
 import com.novacode.supermarket.checkout.CartItem;
-
-import java.math.BigDecimal;
+import com.novacode.supermarket.checkout.CheckoutItem;
 
 /**
- * Campaign Interface represents the pricing logic of the product
+ * Campaign Interface represents the discount logic of the product
  */
 public interface Campaign {
 
-    BigDecimal apply(CartItem cartItem);
+    CheckoutItem apply(CartItem cartItem);
 
 }
