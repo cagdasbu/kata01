@@ -21,7 +21,7 @@ public class ShoppingCartTest {
     @Test
     public void add() {
         Product item = StoreServiceImpl.getInstance().getProduct("1");
-        shoppingCart.add(item);
+        shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.PCS));
         shoppingCart.checkout();
     }
 
@@ -31,7 +31,7 @@ public class ShoppingCartTest {
     @Test
     public void simpleCheckout() {
         Product item = StoreServiceImpl.getInstance().getProduct("1");
-        shoppingCart.add(item);
+        shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.PCS));
         BigDecimal total = shoppingCart.checkout().getTotal();
         Assert.assertEquals(new BigDecimal(.5), total);
     }
@@ -44,8 +44,8 @@ public class ShoppingCartTest {
         Product bean = StoreServiceImpl.getInstance().getProduct("1");
         Product coke = StoreServiceImpl.getInstance().getProduct("2");
 
-        shoppingCart.add(bean);
-        shoppingCart.add(coke);
+        shoppingCart.add(bean, new CountableQuantity(1, Quantity.Type.PCS));
+        shoppingCart.add(coke, new CountableQuantity(1, Quantity.Type.PCS));
 
         BigDecimal total = shoppingCart.checkout().getTotal();
         MathContext mathContext = new MathContext(2);
@@ -53,4 +53,8 @@ public class ShoppingCartTest {
     }
 
 
+    @Test
+    public void emptyCheckout(){
+        shoppingCart.checkout();
+    }
 }

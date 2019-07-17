@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 
 public final class CheckoutItem {
 
-    private String itemDesc;
+    private CartItem cartItem;
 
     private BigDecimal amount;
 
-    public CheckoutItem(String itemDesc, BigDecimal amount) {
-        this.itemDesc = itemDesc;
+    public CheckoutItem(CartItem cartItem, BigDecimal amount) {
+        this.cartItem = cartItem;
         this.amount = amount;
     }
 
-    public String getItemDesc() {
-        return itemDesc;
+    public CartItem getCartItem() {
+        return cartItem;
     }
 
     public BigDecimal getAmount() {
@@ -23,6 +23,6 @@ public final class CheckoutItem {
 
     @Override
     public String toString() {
-        return String.format("%s\t\t\t\t%.2f", itemDesc, amount);
+        return String.format("%s\t\t\t\t%.2f", cartItem, amount);
     }
 }

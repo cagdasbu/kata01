@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ShoppingCart {
 
-    private Map<String, Quantity> cartItems;
+    private Map<String, CartItem> cartItems;
 
     private CampaignManager campaignManager;
 
@@ -23,17 +23,13 @@ public class ShoppingCart {
         this.cartItems = new HashMap<>(1);
     }
 
-    public void add(Product product) {
-        this.add(product, new Quantity(1, Quantity.Type.PCS));
-    }
-
     public void add(Product product, Quantity quantity) {
-        Quantity cartQuantity = this.cartItems.get(product.getProductId());
-        if (cartQuantity == null) {
-            this.cartItems.put(product.getProductId(), quantity);
+        CartItem cartItem = this.cartItems.get(product.getProductId());
+        if (cartItem == null) {
+            this.cartItems.put(product.getProductId(), new CartItem(product, quantity));
         } else {
-            cartQuantity.incrementQuantity(quantity.getValue());
-            this.cartItems.put(product.getProductId(), cartQuantity);
+            cartItem.getQuantity().incrementQuantity(quantity.getValue());
+            this.cartItems.put(product.getProductId(), cartItem);
         }
     }
 
@@ -44,19 +40,18 @@ public class ShoppingCart {
         List<CheckoutItem> checkoutItems = new ArrayList<>();
         List<CheckoutItem> discounts = new ArrayList<>();
 
-        for (Map.Entry<String, Quantity> cartItem : cartItems.entrySet()) {
-            Product product = StoreServiceImpl.getInstance().getProduct(cartItem.getKey());
-            CheckoutItem checkoutItem = new  CheckoutItem(product.getProductName(),
-                    product.getUnitCost().multiply(new BigDecimal(cartItem.getValue().getValue())));
+        for (Map.Entry<String, CartItem> cartItem : cartItems.entrySet()) {
+            Product product = cartItem.getValue().getProduct();
+            CheckoutItem checkoutItem = new  CheckoutItem(cartItem.getValue(), cartItem.getValue().getCost());
             subtotal = subtotal.add(checkoutItem.getAmount());
             checkoutItems.add(checkoutItem);
         }
 
         BigDecimal total = subtotal.add(BigDecimal.ZERO);
-        for (Map.Entry<String, Quantity> cartItem : cartItems.entrySet()) {
+        for (Map.Entry<String, CartItem> cartItem : cartItems.entrySet()) {
             Campaign campaign = campaignManager.getCampaign(cartItem.getKey());
             if(campaign != null) {
-                CheckoutItem checkoutItem = campaign.apply(new CartItem(cartItem.getKey(), cartItem.getValue()));
+                CheckoutItem checkoutItem = campaign.apply(cartItem.getValue());
                 total = total.add(checkoutItem.getAmount());
                 discounts.add(checkoutItem);
             }
