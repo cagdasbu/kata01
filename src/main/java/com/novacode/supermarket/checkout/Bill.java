@@ -1,5 +1,7 @@
 package com.novacode.supermarket.checkout;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
@@ -16,19 +18,28 @@ public final class Bill {
     }
 
     BigDecimal getSubtotal(){
+
+        if(CollectionUtils.isEmpty(checkoutItems)) {
+            return BigDecimal.ZERO;
+        }
+
         return checkoutItems.stream()
                 .map(CheckoutItem::getAmount)
                 .reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
     BigDecimal getDiscountAmount(){
+        if(CollectionUtils.isEmpty(discounts)) {
+            return BigDecimal.ZERO;
+        }
+
         return discounts.stream()
                 .map(CheckoutItem::getAmount)
                 .reduce(BigDecimal.ZERO,BigDecimal::add);
     }
 
     BigDecimal getTotal(){
-        return getSubtotal().subtract(getDiscountAmount());
+        return getSubtotal().add(getDiscountAmount());
     }
 
     @Override
@@ -42,7 +53,7 @@ public final class Bill {
         sb.append("---------------------").append("\n");
         sb.append("Total Savings:\t\t" + getDiscountAmount().round(new MathContext(2))).append("\n\n");
         sb.append("---------------------").append("\n");
-        sb.append("Total:\t\t\t\t" + getTotal().round(new MathContext(2))).append("\n");
+        sb.append("Total to Pay:\t\t" + getTotal().round(new MathContext(2))).append("\n");
         return sb.toString();
     }
 }
