@@ -5,16 +5,16 @@ import org.junit.Test;
 
 public class CampaignManagerImplTest {
 
+    private CampaignManager campaignManager = CampaignManagerImpl.getInstance();
+
     @Test
     public void getCampaign() {
-        CampaignManager campaignManager = CampaignManagerImpl.getInstance();
         Campaign campaign = campaignManager.getCampaign("1");
         Assert.assertNotNull(campaign);
     }
 
     @Test
     public void getDefaultCampaign() {
-        CampaignManager campaignManager = CampaignManagerImpl.getInstance();
         Campaign campaign = campaignManager.getCampaign("3");
         Assert.assertNull(campaign);
     }
