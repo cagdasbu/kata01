@@ -38,4 +38,9 @@ public final class Product {
     public Quantity.Type getQuantityType() {
         return quantityType;
     }
+
+    @Override
+    public String toString() {
+        return productName;
+    }
 }
