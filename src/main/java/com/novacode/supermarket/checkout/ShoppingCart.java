@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ShoppingCart {
 
-    private Map<String, Integer> cartItems;
+    private Map<String, Quantity> cartItems;
 
     private CampaignManager campaignManager;
 
@@ -24,15 +24,16 @@ public class ShoppingCart {
     }
 
     public void add(Product product) {
-        this.add(product, 1);
+        this.add(product, new Quantity(1, Quantity.Type.PCS));
     }
 
-    public void add(Product product, int quantity) {
-        Integer cartQuantity = this.cartItems.get(product.getProductId());
+    public void add(Product product, Quantity quantity) {
+        Quantity cartQuantity = this.cartItems.get(product.getProductId());
         if (cartQuantity == null) {
             this.cartItems.put(product.getProductId(), quantity);
         } else {
-            this.cartItems.put(product.getProductId(), cartQuantity + quantity);
+            cartQuantity.incrementQuantity(quantity.getValue());
+            this.cartItems.put(product.getProductId(), cartQuantity);
         }
     }
 
@@ -43,16 +44,16 @@ public class ShoppingCart {
         List<CheckoutItem> checkoutItems = new ArrayList<>();
         List<CheckoutItem> discounts = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> cartItem : cartItems.entrySet()) {
+        for (Map.Entry<String, Quantity> cartItem : cartItems.entrySet()) {
             Product product = StoreServiceImpl.getInstance().getProduct(cartItem.getKey());
             CheckoutItem checkoutItem = new  CheckoutItem(product.getProductName(),
-                    product.getUnitCost().multiply(new BigDecimal(cartItem.getValue())));
+                    product.getUnitCost().multiply(new BigDecimal(cartItem.getValue().getValue())));
             subtotal = subtotal.add(checkoutItem.getAmount());
             checkoutItems.add(checkoutItem);
         }
 
         BigDecimal total = subtotal.add(BigDecimal.ZERO);
-        for (Map.Entry<String, Integer> cartItem : cartItems.entrySet()) {
+        for (Map.Entry<String, Quantity> cartItem : cartItems.entrySet()) {
             Campaign campaign = campaignManager.getCampaign(cartItem.getKey());
             if(campaign != null) {
                 CheckoutItem checkoutItem = campaign.apply(new CartItem(cartItem.getKey(), cartItem.getValue()));

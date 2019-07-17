@@ -2,6 +2,7 @@ package com.novacode.supermarket.campaign;
 
 import com.novacode.supermarket.checkout.CartItem;
 import com.novacode.supermarket.checkout.CheckoutItem;
+import com.novacode.supermarket.checkout.Quantity;
 import com.novacode.supermarket.product.Product;
 import com.novacode.supermarket.product.StoreServiceImpl;
 import org.junit.Assert;
@@ -18,7 +19,7 @@ public class XForYCampaignImplTest {
     public void apply() {
         Product product = StoreServiceImpl.getInstance().getProduct("1");
         Campaign campaign = new XForYCampaignImpl(product, 3, 2);
-        CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), 5));
+        CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(5, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-0.5).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
     }
 
@@ -26,7 +27,7 @@ public class XForYCampaignImplTest {
     public void apply_highVolume() {
         Product product = StoreServiceImpl.getInstance().getProduct("1");
         Campaign campaign = new XForYCampaignImpl(product, 3, 2);
-        CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), 10));
+        CheckoutItem checkoutItem = campaign.apply(new CartItem(product.getProductId(), new Quantity(10, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-1.5).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
     }
 }

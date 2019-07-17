@@ -1,6 +1,7 @@
 package com.novacode;
 
 import com.novacode.supermarket.checkout.Bill;
+import com.novacode.supermarket.checkout.Quantity;
 import com.novacode.supermarket.checkout.ShoppingCart;
 import com.novacode.supermarket.product.StoreService;
 import com.novacode.supermarket.product.StoreServiceImpl;
@@ -21,9 +22,10 @@ public class KataMarket {
         StoreService storeService = StoreServiceImpl.getInstance();
         cart.add(storeService.getProduct("1"));
         cart.add(storeService.getProduct("1"));
+        cart.add(storeService.getProduct("1"));
         cart.add(storeService.getProduct("2"));
         cart.add(storeService.getProduct("2"));
-        cart.add(storeService.getProduct("3"));
+        cart.add(storeService.getProduct("3"), new Quantity(0.2, Quantity.Type.KG));
 
         logger.info("Checking out...");
 

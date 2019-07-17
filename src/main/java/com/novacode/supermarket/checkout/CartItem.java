@@ -4,9 +4,9 @@ public final class CartItem {
 
     private final String productId;
 
-    private final Integer quantity;
+    private final Quantity quantity;
 
-    public CartItem(String productId, Integer quantity) {
+    public CartItem(String productId, Quantity quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }
@@ -15,7 +15,7 @@ public final class CartItem {
         return productId;
     }
 
-    public Integer getQuantity() {
+    public Quantity getQuantity() {
         return quantity;
     }
 }

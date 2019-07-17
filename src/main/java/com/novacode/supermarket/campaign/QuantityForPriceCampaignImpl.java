@@ -2,6 +2,7 @@ package com.novacode.supermarket.campaign;
 
 import com.novacode.supermarket.checkout.CartItem;
 import com.novacode.supermarket.checkout.CheckoutItem;
+import com.novacode.supermarket.checkout.Quantity;
 import com.novacode.supermarket.product.Product;
 
 import java.math.BigDecimal;
@@ -33,7 +34,11 @@ public class QuantityForPriceCampaignImpl implements Campaign {
 
     @Override
     public CheckoutItem apply(CartItem cartItem) {
-        Integer campaignBundle = cartItem.getQuantity() / campaignQty;
+        if(Quantity.Type.PCS != cartItem.getQuantity().getType()){
+            throw new IllegalArgumentException("Non PCS Quantities are not applicable for QuantityForPriceCampaign");
+        }
+
+        Integer campaignBundle = (int) (cartItem.getQuantity().getValue() / campaignQty);
         return new CheckoutItem(this.product.getProductName(), this.discount.multiply(new BigDecimal(campaignBundle)));
     }
 
