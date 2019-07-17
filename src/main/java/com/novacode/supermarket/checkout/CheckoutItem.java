@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public final class CheckoutItem {
 
-    private CartItem cartItem;
+    private final CartItem cartItem;
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     public CheckoutItem(CartItem cartItem, BigDecimal amount) {
         this.cartItem = cartItem;
