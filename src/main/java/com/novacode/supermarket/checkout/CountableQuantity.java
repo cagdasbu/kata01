@@ -1,15 +1,14 @@
 package com.novacode.supermarket.checkout;
 
-public class CountableQuantity extends Quantity<Integer>{
+public final class CountableQuantity extends Quantity<Integer>{
 
     public CountableQuantity(Integer value, Type type) {
         super(value, type);
     }
 
     @Override
-    public Integer incrementQuantity(Integer value) {
-        this.value += value;
-        return this.value;
+    public CountableQuantity incrementQuantity(Integer value) {
+        return new CountableQuantity(this.value + value, getType());
     }
 
     @Override

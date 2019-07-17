@@ -7,9 +7,8 @@ public class ScalableQuantity extends Quantity<Double> {
     }
 
     @Override
-    public Double incrementQuantity(Double value) {
-        this.value += value;
-        return value;
+    public Quantity incrementQuantity(Double value) {
+        return new ScalableQuantity(this.value + value, getType());
     }
 
     @Override

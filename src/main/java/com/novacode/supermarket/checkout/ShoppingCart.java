@@ -31,8 +31,8 @@ public class ShoppingCart {
         if (cartItem == null) {
             this.cartItems.put(product.getProductId(), new CartItem(product, quantity));
         } else {
-            cartItem.getQuantity().incrementQuantity(quantity.getValue());
-            this.cartItems.put(product.getProductId(), cartItem);
+            Quantity increasedQty = cartItem.getQuantity().incrementQuantity(quantity.getValue());
+            this.cartItems.put(product.getProductId(), new CartItem(product, increasedQty));
         }
     }
 

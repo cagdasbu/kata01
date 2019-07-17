@@ -6,7 +6,7 @@ public abstract class Quantity<T extends Number> {
         PCS, KG;
     };
 
-    T value;
+    final T value;
 
     private Type type;
 
@@ -23,6 +23,6 @@ public abstract class Quantity<T extends Number> {
         return type;
     }
 
-    public abstract T incrementQuantity(T value);
+    public abstract Quantity incrementQuantity(T value);
 
 }

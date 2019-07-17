@@ -13,8 +13,7 @@ public class CartItemTest {
     @Test
     public void getCost() {
         CartItem cartItem = TestItemFactory.getSampleCartItem("Beans");
-        cartItem.getQuantity().incrementQuantity(1);
-        Assert.assertEquals(BigDecimal.valueOf(2), cartItem.getCost());
+        Assert.assertEquals(BigDecimal.valueOf(1), cartItem.getCost());
     }
 
     @Test
