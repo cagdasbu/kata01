@@ -46,11 +46,10 @@ public class ShoppingCartTest {
 
         shoppingCart.add(bean);
         shoppingCart.add(coke);
-        shoppingCart.add(coke);
 
         BigDecimal total = shoppingCart.checkout();
         MathContext mathContext = new MathContext(2);
-        Assert.assertEquals(new BigDecimal(1.9).round(mathContext).round(MathContext.DECIMAL32), total.round(mathContext));
+        Assert.assertEquals(new BigDecimal(1.2).round(mathContext), total.round(mathContext));
     }
 
 
