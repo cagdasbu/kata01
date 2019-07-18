@@ -11,7 +11,7 @@ General domain defined as *SuperMarket* and *campaign*, *product*, and *checkout
 
 Repo using maven as package manager. You can simply build via;
 
-```mvn clean package```
+```mvn clean compile```
 
 ## Testing
 Since no frameworks have been used, a very primitive interaction logic implemented which the problem case bill scenario can be run;
