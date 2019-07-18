@@ -9,8 +9,8 @@ public class StoreServiceImplTest {
 
     @Test
     public void getProduct_Bean() {
-        Product product = StoreServiceImpl.getInstance().getProduct("1");
-        Assert.assertEquals("1", product.getProductId());
+        Product product = StoreServiceImpl.getInstance().getProduct("B");
+        Assert.assertEquals("B", product.getProductId());
         Assert.assertEquals("Beans", product.getProductName());
     }
 

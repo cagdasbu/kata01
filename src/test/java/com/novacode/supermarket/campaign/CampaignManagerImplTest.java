@@ -9,13 +9,13 @@ public class CampaignManagerImplTest {
 
     @Test
     public void getCampaign() {
-        Campaign campaign = campaignManager.getCampaign("1");
+        Campaign campaign = campaignManager.getCampaign("B");
         Assert.assertNotNull(campaign);
     }
 
     @Test
     public void getDefaultCampaign() {
-        Campaign campaign = campaignManager.getCampaign("3");
+        Campaign campaign = campaignManager.getCampaign("O");
         Assert.assertNull(campaign);
     }
 }

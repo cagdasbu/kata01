@@ -18,7 +18,7 @@ public class XForYCampaignImplTest {
 
     @Test
     public void apply() {
-        Product product = StoreServiceImpl.getInstance().getProduct("1");
+        Product product = StoreServiceImpl.getInstance().getProduct("B");
         campaign = new XForYCampaignImpl(product, 3, 2);
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product, new CountableQuantity(5, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-0.5).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));
@@ -26,7 +26,7 @@ public class XForYCampaignImplTest {
 
     @Test
     public void apply_highVolume() {
-        Product product = StoreServiceImpl.getInstance().getProduct("1");
+        Product product = StoreServiceImpl.getInstance().getProduct("B");
         campaign = new XForYCampaignImpl(product, 3, 2);
         CheckoutItem checkoutItem = campaign.apply(new CartItem(product, new CountableQuantity(10, Quantity.Type.PCS)));
         Assert.assertEquals(new BigDecimal(-1.5).round(new MathContext(2)), checkoutItem.getAmount().round(new MathContext(2)));

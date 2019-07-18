@@ -20,14 +20,14 @@ public class ShoppingCartTest {
 
     @Test
     public void add() {
-        Product item = StoreServiceImpl.getInstance().getProduct("1");
+        Product item = StoreServiceImpl.getInstance().getProduct("B");
         shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.PCS));
         shoppingCart.checkout();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void add_incompatibleQuantity() {
-        Product item = StoreServiceImpl.getInstance().getProduct("1");
+        Product item = StoreServiceImpl.getInstance().getProduct("B");
         shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.KG));
     }
 
@@ -36,7 +36,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void simpleCheckout() {
-        Product item = StoreServiceImpl.getInstance().getProduct("1");
+        Product item = StoreServiceImpl.getInstance().getProduct("B");
         shoppingCart.add(item, new CountableQuantity(1, Quantity.Type.PCS));
         BigDecimal total = shoppingCart.checkout().getTotal();
         Assert.assertEquals(new BigDecimal(.5), total);
@@ -47,8 +47,8 @@ public class ShoppingCartTest {
      */
     @Test
     public void simpleCheckout_MultipleItems() {
-        Product bean = StoreServiceImpl.getInstance().getProduct("1");
-        Product coke = StoreServiceImpl.getInstance().getProduct("2");
+        Product bean = StoreServiceImpl.getInstance().getProduct("B");
+        Product coke = StoreServiceImpl.getInstance().getProduct("C");
 
         shoppingCart.add(bean, new CountableQuantity(1, Quantity.Type.PCS));
         shoppingCart.add(coke, new CountableQuantity(1, Quantity.Type.PCS));
