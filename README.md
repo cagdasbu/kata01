@@ -22,5 +22,8 @@ Since no frameworks have been used, a very primitive interaction logic implement
 * C represents Coke
 * O represents Oranges
 
-Campaing details has been implemented as the scenario defined in CampaignManager, not editable.
+Campaing details has been implemented as the scenario defined in CampaignManager, not editable;
+ 
+ 1. B has been registered to campaign `3 Beans for 2 price`
+ 2. C has been registered to campaign `2 Cokes for £1`
  
